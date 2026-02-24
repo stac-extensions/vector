@@ -2,62 +2,118 @@
   "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/table/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/vector/v0.1.0/schema.json"
   ],
   "type": "Collection",
-  "id": "collection",
-  "title": "A title",
-  "description": "A description",
+  "id": "europe-land-use-2018",
+  "title": "European Land Use / Land Cover 2018",
+  "description": "Pan-European land use and land cover dataset derived from satellite imagery. Polygons smaller than 25 ha or narrower than 100 m are not delineated.",
   "license": "Apache-2.0",
   "extent": {
     "spatial": {
       "bbox": [
         [
-          172.9,
-          1.3,
-          173,
-          1.4
+          -31.3,
+          27.6,
+          44.8,
+          71.2
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2015-06-23T00:00:00Z",
-          null
+          "2018-01-01T00:00:00Z",
+          "2018-12-31T23:59:59Z"
         ]
       ]
     }
   },
-  "template:new_field": "test",
-  "template:xyz": {
-    "x": 1,
-    "y": 2,
-    "z": 3
-  },
-  "template:another_one": [
-    1,
-    2,
-    3
+  "vector:geometry_types": [
+    "Polygon",
+    "MultiPolygon"
   ],
+  "vector:mmu": 250000,
+  "vector:mmw": 100,
+  "vector:reference_scale": 100000,
   "assets": {
-    "example": {
-      "href": "https://example.com/examples/file.xyz",
-      "template:new_field": "test"
+    "data": {
+      "href": "https://example.com/examples/europe-land-use-2018.gpkg",
+      "type": "application/geopackage+sqlite3",
+      "title": "Land Use / Land Cover (GeoPackage)",
+      "roles": [
+        "data"
+      ],
+      "table:primary_geometry": "geometry",
+      "table:columns": [
+        {
+          "name": "geometry",
+          "description": "Land parcel boundary",
+          "type": "geometry",
+          "vector:geometry_types": [
+            "Polygon",
+            "MultiPolygon"
+          ],
+          "vector:mmu": 250000,
+          "vector:mmw": 100,
+          "vector:reference_scale": 100000
+        },
+        {
+          "name": "land_use_class",
+          "description": "Land use classification code (e.g. CLC nomenclature)",
+          "type": "string"
+        },
+        {
+          "name": "area_ha",
+          "description": "Parcel area in hectares",
+          "type": "float"
+        },
+        {
+          "name": "confidence",
+          "description": "Classification confidence score (0-1)",
+          "type": "float"
+        }
+      ]
     }
   },
   "item_assets": {
     "data": {
+      "type": "application/geopackage+sqlite3",
+      "title": "Land Use / Land Cover (GeoPackage)",
       "roles": [
         "data"
       ],
-      "template:new_field": "test"
-    }
-  },
-  "summaries": {
-    "datetime": {
-      "minimum": "2015-06-23T00:00:00Z",
-      "maximum": "2019-07-10T13:44:56Z"
+      "table:primary_geometry": "geometry",
+      "table:columns": [
+        {
+          "name": "geometry",
+          "description": "Land parcel boundary",
+          "type": "geometry",
+          "vector:geometry_types": [
+            "Polygon",
+            "MultiPolygon"
+          ],
+          "vector:mmu": 250000,
+          "vector:mmw": 100,
+          "vector:reference_scale": 100000
+        },
+        {
+          "name": "land_use_class",
+          "description": "Land use classification code (e.g. CLC nomenclature)",
+          "type": "string"
+        },
+        {
+          "name": "area_ha",
+          "description": "Parcel area in hectares",
+          "type": "float"
+        },
+        {
+          "name": "confidence",
+          "description": "Classification confidence score (0–1)",
+          "type": "float"
+        }
+      ]
     }
   },
   "links": [
